@@ -16,7 +16,7 @@ class Server:
         :return:
         '''
         devices_list = []
-        result_list = self.dos.excute_cmd('adb devices')
+        result_list = self.dos.excute_cmd('/Users/zhangmengmeng/software/platform-tools/adb devices')
         if len(result_list)>2:
             for i in result_list:
                 if 'List' in i or 'device' not in i:

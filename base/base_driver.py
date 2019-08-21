@@ -8,8 +8,8 @@ class BaseDriver(object):
     def __new__(cls, *args, **kwargs):
         server = Server()
         devices = server.device_list
-        ports = server.appium_port_list
-        server.start1()
+        # ports = server.appium_port_list
+        # server.start1()
         time.sleep(10)
         if not hasattr(cls,'_instance'):
             orig = super(BaseDriver,cls)
@@ -26,8 +26,8 @@ class BaseDriver(object):
                 'automationName':'uiautomator2'
             }
             cls._instance = orig.__new__(cls)
-            info = 'http://127.0.0.1:%s/wd/hub'%int(ports[0])
-            # info = 'http://127.0.0.1:4723/wd/hub'
+            # info = 'http://127.0.0.1:%s/wd/hub'%int(ports[0])
+            info = 'http://127.0.0.1:4723/wd/hub'
             cls._instance.driver = webdriver.Remote(info, desired_caps)
         return cls._instance
 

@@ -6,11 +6,12 @@ import threading
 class Server:
     def __init__(self):
         self.dos = DosCmd()
-        self.device_list = self.get_devices()
-        self.appium_port_list = self.create_port(4700,self.device_list)
-        self.bootstrap_port_list = self.create_port(5700,self.device_list)
+        self.android_device_list = self.get_android_devices()
+        self.ios_device_list = self.get_ios_devices()
+        # self.appium_port_list = self.create_port(4700,self.android_device_list)
+        # self.bootstrap_port_list = self.create_port(5700,self.bootstrap_port_list)
 
-    def get_devices(self):
+    def get_android_devices(self):
         '''
         获取设备信息
         :return:
@@ -27,6 +28,15 @@ class Server:
             return devices_list
         else:
             return None
+    def get_ios_devices(self):
+        devices_list = []
+        result = self.dos.excute_cmd('idevice_id -l')
+        if len(result)>=1:
+            for i in result:
+                info = i.strip('\n')
+                devices_list.append(info)
+        return devices_list
+
 
     def port_is_used(self,port):
         self.dos = DosCmd()

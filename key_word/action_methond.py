@@ -3,6 +3,7 @@ from base.base_function import BaseFunction
 import time
 import random
 import logging
+from selenium.webdriver import ActionChains
 
 _logger = logging.getLogger(__name__)
 
@@ -21,15 +22,11 @@ class ActionMethod(BaseFunction):
         :param type: iOS、Android、browser
         :return:
         '''
-        # element_value = self.get_element(args[0],self.file_path,self.section)
-        # element_list = element_value.split(',')
-        # element_value_tu = self.tuple_make(element_list[0],element_list[1])
-        if args[2]=='android':
-            self.input_element(args[0],args[1])
-        elif args[2]=='ios':
-            self.input_by_acc(args[0],args[1])
-        else:
-            _logger.info('请传入正确的设备类型')
+        self.input_element(args[0],args[1])
+        # elif args[2]=='ios':
+        #     self.input_by_acc(args[0],args[1])
+        # else:
+        #     _logger.info('请传入正确的设备类型')
 
     def on_click(self,*args):
         '''
@@ -38,12 +35,13 @@ class ActionMethod(BaseFunction):
         :param type: iOS、Android、browser
         :return:
         '''
-        if args[1]=='android':
+        if 'MobileBy' not in args[0][0]:
             self.click_element(args[0])
-        elif args[1]=='ios':
-            self.click_acc(args[0])
         else:
-            _logger.info('请传入正确的设备类型')
+            print args[0][1]
+            print type(args[0][1])
+            self.click_acc(args[0][1])
+
 
 
     def ex_find_element(self,*args):
@@ -53,12 +51,7 @@ class ActionMethod(BaseFunction):
         :param type: iOS、Android、browser
         :return:
         '''
-        if args[1]=='android':
-            return self.find_element(args[0])
-        elif args[1]=='ios':
-            return self.find_element_by_accessibility_id(args[0])
-        else:
-            _logger.info('请传入正确的设备类型')
+        return self.find_element(args[0])
 
     def press_keycode(self,*args):
         '''
@@ -96,10 +89,15 @@ class ActionMethod(BaseFunction):
     def switch_h5(self, *args):
         contexts = self.driver.contexts
         print contexts
-        self.switch_to_h5(contexts[args[0]])
-        time.sleep(10)
-        print '****************%s'%self.driver.current_context
+        webview_info = None
+        if args[0] == 0:
+            webview_info = 'NATIVE_APP'
+        elif args[0] == 1 or args[0] == 4:
+            webview_info = 'WEBVIEW_com.nexttao.shopforce'
+        self.switch_to_h5(webview_info)
         print self.driver.current_context
+        time.sleep(10)
+
 
     def choose_color_size(self,*args):
         sku_infos = self.driver.find_elements_by_class_name('sku-group')
@@ -162,3 +160,8 @@ class ActionMethod(BaseFunction):
         contexts = self.driver.contexts
         self.driver.switch_to.context(contexts[1])
         time.sleep(3)
+
+    def cascade_find(self,*args):
+        element = self.find_element(args[0])
+        ActionChains(self.driver).move_to_element(element).click(element).perform()
+        print self.driver.current_context

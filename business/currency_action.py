@@ -11,9 +11,8 @@ class CurrencyAction:
         self.action_method = ActionMethod(driver)
         action_key = None
         for info in line_infos:
-            print info['handle_step']
             if info['element_key'] != None:
-                element_value = self.get_element(info['element_key'], info['file_path'], info['section'])
+                element_value = self.get_element(info['element_key'], info['file_path'], info['section'],'com.nexttao.shopforce')
                 element_list = element_value.split(',,')
                 element_value_tu = self.tuple_make(element_list[0], element_list[1])
             excute_method = getattr(self.action_method, info['handle_step'])
@@ -30,13 +29,14 @@ class CurrencyAction:
                 excute_method(element_value_tu, info['handle_value'], type)
             else:
                 excute_method(element_value_tu, type)
+
         return action_key
 
 
 
     def get_element(self, *args):
         get_by_local = GetByLocal()
-        element_location = get_by_local.get_element(key=args[0],file_path=args[1],section=args[2])
+        element_location = get_by_local.get_element(key=args[0],file_path=args[1],section=args[2],package_name=args[3])
         return element_location
 
     def tuple_make(self, *args):
@@ -46,6 +46,9 @@ class CurrencyAction:
         elif args[0] == 'By.XPATH':
             element_value_tu = (By.XPATH, args[1])
         elif args[0] == 'By.CLASS_NAME':
-            print 'hahhahahah'
             element_value_tu = (By.CLASS_NAME, args[1])
+        elif args[0] == 'MobileBy.ACCESSIBILITY_ID':
+            element_value_tu = ('MobileBy.ACCESSIBILITY_ID', args[1])
+        elif args[0] == 'By.CSS_SELECTOR':
+            element_value_tu = (By.CSS_SELECTOR, args[1])
         return element_value_tu

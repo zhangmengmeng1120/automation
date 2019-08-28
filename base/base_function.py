@@ -31,6 +31,7 @@ class BaseFunction(object):
 
     def input_element(self, loc, text):
         self.inp = self.find_element(loc)
+        print self.inp
         self.inp.clear()
         self.inp.send_keys(text)
 
@@ -71,8 +72,7 @@ class BaseFunction(object):
         :Usage:
             driver.find_element_by_accessibility_id()
         """
-        WebDriverWait(self.driver, timeout).until(lambda driver: driver.find_element(by=MobileBy.ACCESSIBILITY_ID, value=accessibility_id).is_displayed())
-        return WebDriverWait(self.driver, timeout).until(lambda x: x.find_element(*accessibility_id))
+        return self.driver.find_element(by=MobileBy.ACCESSIBILITY_ID, value=accessibility_id)
 
     def click_acc(self,accessibility_id):
         self.find_element_by_accessibility_id(accessibility_id).click()

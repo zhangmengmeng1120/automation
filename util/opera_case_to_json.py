@@ -45,6 +45,5 @@ class OperaCaseToJson:
 
 if __name__ == '__main__':
     import json
-    opera = OperaCaseToJson('android','../config/case.xls',4)
+    opera = OperaCaseToJson('android','../config/case.xls',9)
     line_infos = opera.opera_case()
-    print type(line_infos['dashboard_01'][0]['handle_value'].split(','))

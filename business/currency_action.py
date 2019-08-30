@@ -15,7 +15,7 @@ class CurrencyAction:
                 element_list = element_value.split(',,')
                 element_value_tu = self.tuple_make(element_list[0], element_list[1])
             excute_method = getattr(self.action_method, info['handle_step'])
-            print 'handle_step %s'%info['handle_step']
+            print 'handle_value %s'%info['handle_value']
             if  info['handle_step'] == 'switch_h5' or info['handle_step'] == 'wait_sec':
                 excute_method(int(info['handle_value']))
             elif info['handle_step']== 'swip_info':

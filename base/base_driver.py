@@ -44,7 +44,7 @@ class BaseDriver(object):
                     'unicodeKeyboard': 'True',
                 }
             cls._instance = orig.__new__(cls)
-            info = 'http://10.1.0.4:4723/wd/hub'
+            info = 'http://127.0.0.1:4723/wd/hub'
             cls._instance.driver = webdriver.Remote(info, desired_caps)
         return cls._instance
 

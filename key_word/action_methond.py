@@ -38,8 +38,6 @@ class ActionMethod(BaseFunction):
         if 'MobileBy' not in args[0][0]:
             self.click_element(args[0])
         else:
-            print args[0][1]
-            print type(args[0][1])
             self.click_acc(args[0][1])
 
 
@@ -87,16 +85,13 @@ class ActionMethod(BaseFunction):
             for num in args[1]:
                 self.click_acc(num)
     def switch_h5(self, *args):
-        contexts = self.driver.contexts
-        print contexts
         webview_info = None
         if args[0] == 0:
             webview_info = 'NATIVE_APP'
         elif args[0] == 1 or args[0] == 4:
-            webview_info = 'WEBVIEW_com.nexttao.shopforce'
+            webview_info = 'WEBVIEW_com.nexttao.shopforce.enterprise'
         self.switch_to_h5(webview_info)
-        print self.driver.current_context
-        time.sleep(10)
+        time.sleep(5)
 
 
     def choose_color_size(self,*args):
@@ -150,18 +145,22 @@ class ActionMethod(BaseFunction):
 
     def location_click(self,*args):
         local_info = args[1].split(',')
-        locals = [(float(local_info[0]),float(local_info[1]))]
-        contexts = self.driver.contexts
-        self.switch_h5(contexts[0])
-        time.sleep(3)
+        print '########## %s ' %local_info
+        handle = self.driver.current_window_handle
+        print '111111 %s' % handle
+        all_handle = self.driver.window_handles
+        print '333333 %s' % all_handle
         page_size = self.GetPageSize()
+        print page_size
+        # self.switch_h5(0)
+        page_size = self.GetPageSize()
+        print page_size
+        locals = [(float(local_info[0]),float(local_info[1]))]
         click_locals = [(page_size[0] * x, page_size[1] * y) for (x, y) in locals]
-        self.driver.tap(click_locals, 500)
-        contexts = self.driver.contexts
-        self.driver.switch_to.context(contexts[1])
-        time.sleep(3)
+        print click_locals
+        self.driver.tap([(70,180)], 500)
+        # self.switch_h5(1)
 
     def cascade_find(self,*args):
         element = self.find_element(args[0])
         ActionChains(self.driver).move_to_element(element).click(element).perform()
-        print self.driver.current_context

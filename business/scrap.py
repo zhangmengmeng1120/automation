@@ -10,9 +10,43 @@ class Scrap:
         self.type=args[1]
         self.case = OperaCaseToJson(self.type,'../config/case.xls',13)
         self.line_infos = self.case.opera_case()
+        self.action_method = CurrencyAction()
 
 
     def scraping_01(self):
-        action_method = CurrencyAction()
-        action_method.run_method(self.line_infos['scrap_01'],self.type,self.driver)
+        action_type = 'scrap_01'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
 
+    def scraping_02(self):
+        action_type = 'scrap_02'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+
+    def scraping_03(self):
+        action_type = 'scrap_03'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+    def scraping_04(self):
+        action_type = 'scrap_04'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+    def scraping_05(self):
+        action_type = 'scrap_05'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+    def scraping_06(self):
+        action_type = 'scrap_06'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+    def scrap_cases(self):
+        infos = ['scrap_01','scrap_02','scrap_03','scrap_04','scrap_05','scrap_06']
+        for i in infos:
+            action_type = i
+            while action_type != None:
+                action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)

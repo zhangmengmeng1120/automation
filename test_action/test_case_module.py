@@ -14,6 +14,8 @@ if __name__ == '__main__':
     # suite.addTest(TestCase("transferout_all"))
     # suite.addTest(TestCase("delivery_refund_all"))
     suite.addTest(TestCase("delivery_receive_all"))
+    suite.addTest(TestCase("transferin_all"))
+    suite.addTest(TestCase("reload_all"))
     report_dir = '../report'
     now = time.strftime("%Y-%m-%d_%H-%M-%S")
     report_name = '{0}/{1}.html'.format(report_dir, now)

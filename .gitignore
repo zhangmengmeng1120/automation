@@ -6,6 +6,7 @@
 *.ear
 *.pyc
 *.map
+*.html
 
 
 # Eclipse Project Files #

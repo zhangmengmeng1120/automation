@@ -22,7 +22,7 @@ class BaseDriver(object):
                     'platformName': 'Android',
                     'platformVersion': '8.1.0',
                     'deviceName': devices[0],
-                    'appPackage': 'com.nexttao.shopforce',
+                    'appPackage': 'com.nexttao.shopforce.enterprise',
                     'appActivity': 'com.nexttao.shopforce.fragment.SplashActivity',
                     'unicodeKeyboard': 'True',
                     'resetKeyboard': 'True',
@@ -44,7 +44,7 @@ class BaseDriver(object):
                     'unicodeKeyboard': 'True',
                 }
             cls._instance = orig.__new__(cls)
-            info = 'http://127.0.0.1:4723/wd/hub'
+            info = 'http://10.1.0.4:4723/wd/hub'
             cls._instance.driver = webdriver.Remote(info, desired_caps)
         return cls._instance
 
@@ -75,23 +75,27 @@ if __name__ == '__main__':
     driver.find_element_by_id('menu_btn_layout').click()
     info = "1,0.1,0.8,0.1,0.25"
     swip_info(driver, info)
-    driver.find_element_by_xpath("//android.widget.TextView[contains(@text,'门店出库')]").click()
+    driver.find_element_by_xpath("//android.widget.TextView[contains(@text,'补货订单')]").click()
     time.sleep(2)
-    driver.find_element_by_xpath("//android.widget.TextView[contains(@text,'调拨出库')]").click()
-    time.sleep(3)
-    driver.find_element_by_id('details_text').click()
+    driver.find_element_by_xpath("//android.widget.TextView[contains(@text,'补货申请')]").click()
     time.sleep(3)
     contest = driver.contexts
     driver.switch_to.context(contest[1])
-    time.sleep(5)
-    element = driver.find_element_by_css_selector('div#searchIcon>img')
-
-    ActionChains(driver).move_to_element(element).click(element).perform()
-    # js = "document.getElementsByName(\"input-item\").style.display='block';"
-    # # 调用js脚本
-    # driver.execute_script(js)
-    time.sleep(3)
-    driver.find_element_by_class_name("input-item").send_keys("1906001")
+    ele = driver.find_element_by_css_selector('div[class$="empty"]')
+    print ele
+    # driver.find_element_by_id('details_text').click()
+    # time.sleep(3)
+    # contest = driver.contexts
+    # driver.switch_to.context(contest[1])
+    # time.sleep(5)
+    # element = driver.find_element_by_css_selector('div#searchIcon>img')
+    #
+    # ActionChains(driver).move_to_element(element).click(element).perform()
+    # # js = "document.getElementsByName(\"input-item\").style.display='block';"
+    # # # 调用js脚本
+    # # driver.execute_script(js)
+    # time.sleep(3)
+    # driver.find_element_by_class_name("input-item").send_keys("1906001")
 
 
 

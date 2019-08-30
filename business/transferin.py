@@ -3,48 +3,48 @@ from util.opera_case_to_json import OperaCaseToJson
 from currency_action import CurrencyAction
 
 
-class DeliveryReceive:
+class TransferIn:
 
     def __init__(self,*args):
         self.driver = args[0]
         self.type=args[1]
-        self.case = OperaCaseToJson(self.type,'../config/case.xls',9)
+        self.case = OperaCaseToJson(self.type,'../config/case.xls',8)
         self.line_infos = self.case.opera_case()
         self.action_method = CurrencyAction()
 
 
-    def deliveryRE_01(self):
-        action_type = self.action_method.run_method(self.line_infos['deliveryRecv_01'],self.type,self.driver)
+    def transferin_01(self):
+        action_type = 'transferin_01'
         while action_type != None:
             action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
 
-    def deliveryRE_02(self):
+    def transferin_02(self):
 
-        action_type = self.action_method.run_method(self.line_infos['deliveryRecv_02'],self.type,self.driver)
-        while action_type != None:
-            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
-
-
-    def deliveryRE_04(self):
-
-        action_type = self.action_method.run_method(self.line_infos['deliveryRecv_04'],self.type,self.driver)
-        while action_type != None:
-            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
-
-    def deliveryRE_05(self):
-        action_type = self.action_method.run_method(self.line_infos['deliveryRecv_05'],self.type,self.driver)
+        action_type = 'transferin_02'
         while action_type != None:
             action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
 
 
-    def deliveryRE_06(self):
-        action_type = self.action_method.run_method(self.line_infos['deliveryRecv_06'],self.type,self.driver)
+    def transferin_04(self):
+
+        action_type = 'transferin_04'
         while action_type != None:
             action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
 
-    def deliveryRE_cases(self):
-        infos = ['deliveryRecv_01','deliveryRecv_02','deliveryRecv_04','deliveryRecv_05','deliveryRecv_06']
+    def transferin_05(self):
+        action_type = 'transferin_05'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+
+    def transferin_06(self):
+        action_type = 'transferin_06'
+        while action_type != None:
+            action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
+
+    def transferin_cases(self):
+        infos = ['transferin_01','transferin_02','transferin_04','transferin_05','transferin_06']
         for i in infos:
-            action_type = self.action_method.run_method(self.line_infos[i], self.type, self.driver)
+            action_type = i
             while action_type != None:
                 action_type = self.action_method.run_method(self.line_infos[action_type], self.type, self.driver)
